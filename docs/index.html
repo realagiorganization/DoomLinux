@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <title>DoomLinux</title>
+    <meta
+      name="description"
+      content="A minimal Linux live ISO that boots directly into Doom, built from source with a single script."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="backdrop">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="grid"></div>
+    </div>
+
+    <header class="hero">
+      <nav class="nav">
+        <div class="logo">DoomLinux</div>
+        <div class="pill">Boots Doom. Every time.</div>
+      </nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="tag">Minimal Linux Live ISO</p>
+          <h1>Build a bootable OS that drops straight into Doom.</h1>
+          <p class="lede">
+            DoomLinux compiles the Linux kernel, BusyBox, and FBDoom from
+            source, then assembles a bootable ISO that launches Doom on boot.
+            One script. Deterministic output.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="https://github.com/realagiorganization/DoomLinux">View on GitHub</a>
+            <span class="cta-note">MIT licensed, single script workflow</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="panel-head">
+            <span class="status-dot"></span>
+            <span>build.log</span>
+          </div>
+          <pre class="panel-body"><code>$ ./DoomLinux.sh
+-- fetch kernel 5.4.3
+-- build busybox 1.35.0 (static)
+-- compile fbdoom (static)
+-- assemble rootfs
+-- create DoomLinux.iso
+-- boot to Doom</code></pre>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-title">
+          <h2>Fast path</h2>
+          <p>Everything you need to build, test, and boot.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Build</h3>
+            <p>Run the single script or use the Makefile helper.</p>
+            <code>./DoomLinux.sh</code>
+          </article>
+          <article class="card">
+            <h3>Dockerized</h3>
+            <p>Use containerized workflows for repeatable builds.</p>
+            <code>make docker-run-ubuntu</code>
+          </article>
+          <article class="card">
+            <h3>Test</h3>
+            <p>Smoke tests verify artifacts and optional QEMU checks.</p>
+            <code>make test-smoke</code>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <h2>What the script does</h2>
+          <ul class="list">
+            <li>Downloads kernel, BusyBox, and FBDoom sources.</li>
+            <li>Compiles everything statically where possible.</li>
+            <li>Builds initramfs and ISO boot assets.</li>
+            <li>Ships a bootable ISO that runs Doom on startup.</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <h3>Artifact layout</h3>
+          <p>Generated assets live in predictable folders.</p>
+          <div class="tree">
+            <span>staging/</span>
+            <span>rootfs/</span>
+            <span>iso/boot/</span>
+            <span>DoomLinux.iso</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Designed for hacking</h2>
+          <p>Swap versions, tweak configs, or run it in CI.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Override versions</h3>
+            <p>Pin kernel or BusyBox versions per build.</p>
+            <code>KERNEL_VERSION=... make build</code>
+          </article>
+          <article class="card">
+            <h3>CI friendly</h3>
+            <p>Dedicated workflows build, lint, test, and report.</p>
+            <code>.github/workflows/</code>
+          </article>
+          <article class="card">
+            <h3>Headless boot</h3>
+            <p>QEMU checks confirm the ISO boots to Doom.</p>
+            <code>make test-qemu</code>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <span>DoomLinux</span>
+        <span class="footer-dot">•</span>
+        <span>Boot to Doom, from source.</span>
+      </div>
+      <a href="https://github.com/realagiorganization/DoomLinux">GitHub</a>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

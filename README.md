@@ -46,6 +46,9 @@ Two container definitions live under `docker/`:
 - `Dockerfile.alpine` provides an Alpine Linux alternative with equivalent packages.
 
 Both images expect the repository to be mounted at `/workspace` (the Makefile targets handle this) and emit `DoomLinux.iso` back into the host checkout.
+
+## GitHub Pages
+The `docs/` folder powers the GitHub Pages site. The `Pages` workflow deploys it and the `Pages Screenshot` workflow captures a rendered screenshot of the site into a build artifact.
 ## Explanation
 ### Creating folders and downloading the source codes 
 
@@ -313,4 +316,3 @@ This project is made just for those who wants to learn how basic linux systems w
 
 ## Licence 
 Licensed under the MIT License.
-

@@ -1,0 +1,37 @@
+name: Pages Screenshot
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Pages"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.47.2
+          npx playwright install --with-deps chromium
+      - name: Capture screenshot
+        env:
+          PAGES_URL: https://realagiorganization.github.io/DoomLinux/
+          SCREENSHOT_PATH: tests/artifacts/pages-screenshot.png
+        run: node scripts/pages-screenshot.mjs
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-screenshot
+          path: tests/artifacts/pages-screenshot.png
